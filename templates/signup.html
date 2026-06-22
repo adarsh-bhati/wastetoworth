@@ -1,0 +1,326 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Sign Up - Waste2Worth AI</title>
+
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+
+<link rel="stylesheet"
+href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+<style>
+
+body{
+    background:linear-gradient(135deg,#ecfdf5,#d1fae5);
+    min-height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    font-family:'Segoe UI',sans-serif;
+}
+
+.signup-card{
+
+    width:450px;
+
+    background:white;
+
+    padding:40px;
+
+    border-radius:25px;
+
+    box-shadow:
+    0 15px 40px rgba(0,0,0,0.08);
+
+    border:1px solid #d1fae5;
+}
+
+.logo{
+
+    width:80px;
+    height:80px;
+
+    background:#10b981;
+
+    border-radius:50%;
+
+    display:flex;
+    justify-content:center;
+    align-items:center;
+
+    margin:auto;
+    margin-bottom:15px;
+}
+
+.logo i{
+
+    color:white;
+    font-size:35px;
+}
+
+.logo-title{
+
+    text-align:center;
+
+    font-weight:700;
+
+    color:#10b981;
+
+    margin-bottom:5px;
+}
+
+.sub-text{
+
+    text-align:center;
+
+    color:#64748b;
+
+    margin-bottom:30px;
+}
+
+.form-control{
+
+    height:55px;
+
+    border-radius:12px;
+
+    margin-bottom:15px;
+}
+
+.form-control:focus{
+
+    border-color:#10b981;
+
+    box-shadow:
+    0 0 0 0.2rem rgba(16,185,129,0.15);
+}
+
+.btn-signup{
+
+    height:55px;
+
+    border:none;
+
+    border-radius:12px;
+
+    background:#10b981;
+
+    color:white;
+
+    font-weight:600;
+}
+
+.btn-signup:hover{
+
+    background:#059669;
+}
+
+.login-link{
+
+    color:#10b981;
+
+    text-decoration:none;
+
+    font-weight:600;
+}
+
+.login-link:hover{
+
+    color:#059669;
+}
+
+.validation-msg{
+
+    font-size:13px;
+    margin-top:-8px;
+    margin-bottom:10px;
+}
+
+.alert{
+
+    border-radius:12px;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="signup-card">
+
+    <div class="logo">
+        <i class="fa-solid fa-recycle"></i>
+    </div>
+
+    <h2 class="logo-title">
+        Waste2Worth
+    </h2>
+
+    <p class="sub-text">
+        Create Your Account
+    </p>
+
+    {% if error %}
+    <div class="alert alert-danger">
+        {{ error }}
+    </div>
+    {% endif %}
+
+    <form method="POST" action="/signup">
+
+        <input
+        type="text"
+        class="form-control"
+        id="username"
+        name="username"
+        placeholder="Username"
+        required>
+
+        <div id="usernameMsg"
+             class="validation-msg">
+        </div>
+
+        <input
+        type="email"
+        class="form-control"
+        id="email"
+        name="email"
+        placeholder="Email Address"
+        required>
+
+        <div id="emailMsg"
+             class="validation-msg">
+        </div>
+
+        <input
+        type="password"
+        class="form-control"
+        id="password"
+        name="password"
+        placeholder="Password"
+        required>
+
+        <div id="passwordMsg"
+             class="validation-msg">
+        </div>
+
+        <button
+        type="submit"
+        class="btn btn-signup w-100">
+
+            Create Account
+
+        </button>
+
+    </form>
+
+    <div class="text-center mt-4">
+
+        Already have an account?
+
+        <a href="/login"
+           class="login-link">
+
+           Login
+
+        </a>
+
+    </div>
+
+</div>
+
+<script>
+
+const usernamePattern = /^[A-Za-z0-9_]+$/;
+
+const emailPattern =
+/^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$/;
+
+const passwordPattern =
+/^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&^()_+\-=]).+$/;
+
+function validateUsername(){
+
+    const value =
+    document.getElementById("username").value.trim();
+
+    if(value === "") return;
+
+    if(!usernamePattern.test(value)){
+
+        document.getElementById("usernameMsg").innerHTML =
+        "<span class='text-danger'>Only letters, numbers and underscore allowed</span>";
+
+        return;
+    }
+
+    document.getElementById("usernameMsg").innerHTML =
+    "<span class='text-success'>Valid Username</span>";
+}
+
+function validateEmail(){
+
+    const value =
+    document.getElementById("email").value.trim();
+
+    if(value === "") return;
+
+    if(!emailPattern.test(value)){
+
+        document.getElementById("emailMsg").innerHTML =
+        "<span class='text-danger'>Invalid Email Format</span>";
+
+        return;
+    }
+
+    document.getElementById("emailMsg").innerHTML =
+    "<span class='text-success'>Valid Email</span>";
+}
+
+function validatePassword(){
+
+    const value =
+    document.getElementById("password").value.trim();
+
+    if(value === "") return;
+
+    if(value.length < 8){
+
+        document.getElementById("passwordMsg").innerHTML =
+        "<span class='text-danger'>Minimum 8 Characters Required</span>";
+
+        return;
+    }
+
+    if(!passwordPattern.test(value)){
+
+        document.getElementById("passwordMsg").innerHTML =
+        "<span class='text-danger'>Must contain letter, number and special character</span>";
+
+        return;
+    }
+
+    document.getElementById("passwordMsg").innerHTML =
+    "<span class='text-success'>Strong Password</span>";
+}
+
+document.getElementById("username")
+.addEventListener("input", validateUsername);
+
+document.getElementById("email")
+.addEventListener("input", validateEmail);
+
+document.getElementById("password")
+.addEventListener("input", validatePassword);
+
+</script>
+
+</body>
+</html>
+

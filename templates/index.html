@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Waste2Worth AI</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+</head>
+
+<body>
+
+<!-- NAVBAR -->
+
+<nav class="navbar navbar-expand-lg bg-white sticky-top shadow-sm">
+    <div class="container">
+
+        <a class="navbar-brand fw-bold fs-3 text-success" href="#">
+            <i class="fa-solid fa-recycle me-2"></i>
+            Waste2Worth
+        </a>
+
+        <button class="navbar-toggler"
+                data-bs-toggle="collapse"
+                data-bs-target="#navbarNav">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarNav">
+
+            <ul class="navbar-nav ms-auto">
+
+                <li class="nav-item">
+                    <a class="nav-link active-nav" href="#">Home</a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link" href="/upload">Upload</a>
+                </li>
+
+                <li class="nav-item">
+                  <a class="nav-link" href="/history">
+                   <i class="fa-solid fa-clock-rotate-left me-1"></i>
+                    History
+                  </a>
+                </li>
+                <li class="nav-item ms-3">
+                 <div class="user-avatar">
+                   {{ current_user.username[0]|upper }}
+                 </div>
+                </li>
+                <li class="nav-item ms-2">
+                  <a href="/logout" class="btn btn-danger btn-sm">
+                     Logout
+                  </a>
+                </li>
+
+
+            </ul>
+
+        </div>
+    </div>
+</nav>
+
+
+<!-- HERO SECTION -->
+
+<section class="hero">
+
+    <div class="container">
+
+        <span class="badge eco-badge">
+            ✨ AI Powered Sustainability
+        </span>
+
+        <h1 class="hero-title">
+            Turn Waste Into
+            <span>Creativity</span>
+            with AI
+        </h1>
+
+        <p class="hero-subtitle">
+            Upload a photo of waste materials and discover
+            creative DIY projects powered by Artificial Intelligence.
+        </p>
+
+        <div class="hero-buttons">
+
+            <a href="/upload" class="btn btn-success btn-lg px-5 py-3">
+                <i class="fa-solid fa-upload me-2"></i>
+                Upload Waste Image
+            </a>
+
+            <a href="/manual" class="btn btn-outline-success btn-lg px-5 py-3">
+                ✨ Explore Ideas
+            </a>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- MATERIAL PREVIEW -->
+
+<section class="materials-section">
+
+    <div class="container">
+
+        <div class="row g-4">
+
+            <div class="col-md-6">
+                <div class="material-card">
+                    <div class="material-box">
+                        <i class="fa-solid fa-recycle"></i>
+                    </div>
+                    <h5>Plastic Bottles</h5>
+                </div>
+            </div>
+
+            <div class="col-md-6">
+                <div class="material-card">
+                    <div class="material-box yellow-box"></div>
+                    <h5>Cardboard</h5>
+                </div>
+            </div>
+
+            <div class="col-md-6">
+                <div class="material-card">
+                    <div class="material-box blue-box"></div>
+                    <h5>Glass Jars</h5>
+                </div>
+            </div>
+
+            <div class="col-md-6">
+                <div class="material-card">
+                    <div class="material-box">
+                        ✨
+                    </div>
+                    <h5>DIY Magic</h5>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- FEATURES -->
+
+<section class="features">
+
+    <div class="container">
+
+        <h2 class="section-title">
+            Powerful Features for
+            <span>Sustainable Creation</span>
+        </h2>
+
+        <p class="section-subtitle">
+            Everything you need to transform waste into useful products
+        </p>
+
+        <div class="row g-4 mt-4">
+
+            <div class="col-md-6">
+                <div class="feature-card">
+                    <div class="feature-icon bg-primary">
+                        <i class="fa-solid fa-upload"></i>
+                    </div>
+
+                    <h3>AI Waste Detection</h3>
+
+                    <p>
+                        Upload waste images and identify materials instantly.
+                    </p>
+                </div>
+            </div>
+
+            <div class="col-md-6">
+                <div class="feature-card">
+                    <div class="feature-icon bg-success">
+                        ✨
+                    </div>
+
+                    <h3>Smart DIY Suggestions</h3>
+
+                    <p>
+                        Personalized eco-friendly project ideas.
+                    </p>
+                </div>
+            </div>
+
+            <div class="col-md-6">
+                <div class="feature-card">
+                    <div class="feature-icon bg-danger">
+                        👁
+                    </div>
+
+                    <h3>Visual Preview</h3>
+
+                    <p>
+                        Preview your project before building it.
+                    </p>
+                </div>
+            </div>
+
+            <div class="col-md-6">
+                <div class="feature-card">
+                    <div class="feature-icon bg-warning">
+                        📖
+                    </div>
+
+                    <h3>Step By Step Guide</h3>
+
+                    <p>
+                        Detailed instructions with safety tips.
+                    </p>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- FOOTER -->
+
+<footer>
+
+    <div class="container">
+
+        <div class="row">
+
+            <div class="col-md-4">
+
+                <h3 class="text-success">
+                    <i class="fa-solid fa-recycle"></i>
+                    Waste2Worth
+                </h3>
+
+                <p>
+                    Transform waste into creativity with AI.
+                </p>
+
+            </div>
+
+            <div class="col-md-2">
+                <h5>Product</h5>
+                <p>Upload</p>
+                <p>Ideas</p>
+                <p>Dashboard</p>
+            </div>
+
+            <div class="col-md-2">
+                <h5>Company</h5>
+                <p>About</p>
+                <p>Contact</p>
+            </div>
+
+            <div class="col-md-4 text-md-end">
+
+                <i class="fab fa-twitter fs-3 me-3"></i>
+                <i class="fab fa-linkedin fs-3 me-3"></i>
+                <i class="fab fa-github fs-3"></i>
+
+            </div>
+
+        </div>
+
+        <hr>
+
+        <div class="text-center">
+            © 2026 Waste2Worth AI
+        </div>
+
+    </div>
+
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+</body>
+</html>

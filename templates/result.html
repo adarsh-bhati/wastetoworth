@@ -1,0 +1,393 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Generated Project | Waste2Worth AI</title>
+
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+<link rel="stylesheet"
+href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+<style>
+
+body{
+    background:#f7fbf9;
+    font-family:'Inter',sans-serif;
+}
+
+.hero{
+    text-align:center;
+    padding:70px 0;
+}
+
+.hero h1{
+    font-size:58px;
+    font-weight:800;
+}
+
+.hero span{
+    color:#10c469;
+}
+
+.main-card{
+    background:white;
+    border-radius:30px;
+    padding:40px;
+    box-shadow:0 10px 30px rgba(0,0,0,.05);
+    border:1px solid #dbe4df;
+}
+
+.preview-image{
+    width:100%;
+    height:450px;
+    border-radius:25px;
+    object-fit:cover;
+}
+
+.badge-box{
+    display:inline-block;
+    padding:12px 20px;
+    border-radius:30px;
+    margin:5px;
+    font-weight:600;
+}
+
+.easy{
+    background:#dff7e8;
+    color:#10c469;
+}
+
+.medium{
+    background:#fff4d6;
+    color:#d97706;
+}
+
+.hard{
+    background:#ffe2e2;
+    color:#dc2626;
+}
+
+.info-card{
+    background:#f8fffb;
+    border:1px solid #dff7e8;
+    border-radius:20px;
+    padding:25px;
+    height:100%;
+}
+
+.info-card h5{
+    color:#10c469;
+    margin-bottom:15px;
+}
+
+.step{
+    background:#f7fbf9;
+    padding:15px;
+    border-radius:12px;
+    margin-bottom:12px;
+}
+
+.material-chip{
+    display:inline-block;
+    background:#dff7e8;
+    color:#10c469;
+    padding:10px 18px;
+    border-radius:25px;
+    margin:5px;
+    font-weight:600;
+}
+
+.eco-card{
+    text-align:center;
+    background:white;
+    border-radius:20px;
+    padding:30px;
+    border:1px solid #dbe4df;
+}
+
+.eco-card i{
+    font-size:40px;
+    color:#10c469;
+    margin-bottom:15px;
+}
+
+.eco-card h2{
+    font-weight:800;
+}
+
+.action-btn{
+    background:#10c469;
+    color:white;
+    border:none;
+    padding:16px 35px;
+    border-radius:15px;
+    font-weight:600;
+}
+
+.action-btn:hover{
+    background:#0ea95c;
+}
+
+.secondary-btn{
+    border:2px solid #10c469;
+    color:#10c469;
+    padding:16px 35px;
+    border-radius:15px;
+    font-weight:600;
+    background:white;
+}
+
+.section-title{
+    font-weight:700;
+    margin-bottom:20px;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="container py-5">
+
+    <div class="hero">
+
+        <h1>
+            Your AI Generated
+            <span>Eco Project</span>
+        </h1>
+
+        <p class="text-muted">
+            Transform waste into something useful
+        </p>
+
+    </div>
+
+    <div class="main-card">
+
+        <div class="row g-4">
+
+            <!-- IMAGE -->
+
+            <div class="col-lg-6">
+
+                <img
+                src="https://images.unsplash.com/photo-1520607162513-77705c0f0d4a?q=80&w=1200"
+                class="preview-image">
+
+            </div>
+
+            <!-- DETAILS -->
+
+            <div class="col-lg-6">
+
+                <h2 class="fw-bold mb-3">
+
+                    {{ project.project_name }}
+
+                </h2>
+
+                <p class="text-muted mb-4">
+
+                    {{ project.description }}
+
+                </p>
+
+                <div class="mb-4">
+
+                    <span class="badge-box easy">
+                        Difficulty:
+                        {{ project.difficulty }}
+                    </span>
+
+                    <span class="badge-box medium">
+                        Time:
+                        {{ project.build_time }}
+                    </span>
+
+                </div>
+
+                <div class="info-card">
+
+                    <h5>
+                        Materials Required
+                    </h5>
+
+                    {% for item in project.materials %}
+
+                    <span class="material-chip">
+                        {{ item }}
+                    </span>
+
+                    {% endfor %}
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <!-- STEPS -->
+
+        <div class="mt-5">
+
+            <h3 class="section-title">
+
+                Step-by-Step Instructions
+
+            </h3>
+
+            {% for step in project.steps %}
+
+            <div class="step">
+
+                <strong>Step {{ loop.index }}:</strong>
+
+                {{ step }}
+
+            </div>
+
+            {% endfor %}
+
+        </div>
+
+        <!-- SAFETY -->
+
+        <div class="mt-5">
+
+            <div class="info-card">
+
+                <h5>
+
+                    <i class="fa-solid fa-shield-halved"></i>
+
+                    Safety Tips
+
+                </h5>
+
+                <p>
+
+                    {{ project.safety_tips }}
+
+                </p>
+
+            </div>
+
+        </div>
+
+        <!-- ECO METRICS -->
+
+        <div class="mt-5">
+
+            <h3 class="section-title">
+
+                Environmental Impact
+
+            </h3>
+
+            <div class="row g-4">
+
+                <div class="col-md-4">
+
+                    <div class="eco-card">
+
+                        <i class="fa-solid fa-recycle"></i>
+
+                        <h2>
+
+                            {{ project.waste_reused }}
+
+                        </h2>
+
+                        <p>Waste Reused</p>
+
+                    </div>
+
+                </div>
+
+                <div class="col-md-4">
+
+                    <div class="eco-card">
+
+                        <i class="fa-solid fa-leaf"></i>
+
+                        <h2>
+
+                            {{ project.co2_saved }}
+
+                        </h2>
+
+                        <p>Kg CO₂ Saved</p>
+
+                    </div>
+
+                </div>
+
+                <div class="col-md-4">
+
+                    <div class="eco-card">
+
+                        <i class="fa-solid fa-earth-asia"></i>
+
+                        <h2>
+
+                            {{ project.landfill_reduction }}
+
+                        </h2>
+
+                        <p>Kg Landfill Reduced</p>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <!-- ACTIONS -->
+
+        <div class="text-center mt-5">
+            <a href="/">
+             <button class="secondary-btn">
+               <i class="fa-solid fa-house"></i>
+                Home
+             </button>
+            </a>
+
+            <a href="/generate-again">
+
+                <button class="action-btn">
+
+                    <i class="fa-solid fa-wand-magic-sparkles"></i>
+
+                    Generate Another Idea
+
+                </button>
+
+            </a>
+
+            <a href="/history">
+
+                <button class="secondary-btn">
+
+                    View History
+
+                </button>
+
+            </a>
+
+        </div>
+
+    </div>
+
+</div>
+
+</body>
+</html>

@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Manual Material Entry | Waste2Worth AI</title>
+
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+
+<link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+<link rel="stylesheet"
+href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+<style>
+
+body{
+    background:#f7fbf9;
+    font-family:'Inter',sans-serif;
+}
+
+.page-header{
+    padding:80px 0 30px;
+    text-align:center;
+}
+
+.page-header h1{
+    font-size:55px;
+    font-weight:800;
+}
+
+.page-header span{
+    color:#10c469;
+}
+
+.page-header p{
+    color:#64748b;
+    margin-top:15px;
+    font-size:20px;
+}
+
+.entry-card{
+    max-width:1000px;
+    margin:auto;
+    background:white;
+    border-radius:30px;
+    padding:40px;
+    box-shadow:0 10px 30px rgba(0,0,0,.05);
+    border:1px solid #dbe4df;
+}
+
+.material-row{
+    display:flex;
+    gap:15px;
+    margin-bottom:15px;
+}
+
+.material-input{
+    flex:1;
+}
+
+.material-input input{
+    height:55px;
+}
+
+.add-btn{
+    background:#10c469;
+    color:white;
+    border:none;
+    padding:12px 25px;
+    border-radius:12px;
+}
+
+.remove-btn{
+    border:none;
+    background:#ef4444;
+    color:white;
+    padding:12px 18px;
+    border-radius:12px;
+}
+
+.material-preview{
+    margin-top:30px;
+}
+
+.chip{
+    display:inline-block;
+    background:#dff7e8;
+    color:#10c469;
+    padding:10px 20px;
+    border-radius:30px;
+    margin:5px;
+    font-weight:600;
+}
+
+.generate-section{
+    margin-top:40px;
+    text-align:center;
+}
+
+.generate-btn{
+    background:#10c469;
+    color:white;
+    border:none;
+    padding:16px 50px;
+    border-radius:15px;
+    font-size:18px;
+    font-weight:600;
+}
+
+.generate-btn:hover{
+    background:#0ea95c;
+}
+
+.tip-box{
+    margin-top:30px;
+    background:#f0fff7;
+    border-left:5px solid #10c469;
+    border-radius:15px;
+    padding:20px;
+}
+
+.tip-box h5{
+    color:#10c469;
+}
+
+</style>
+
+</head>
+<body>
+
+<!-- NAVBAR -->
+
+<nav class="navbar navbar-expand-lg bg-white shadow-sm">
+<div class="container">
+
+<a class="navbar-brand fw-bold fs-3 text-success" href="/">
+<i class="fa-solid fa-recycle"></i>
+Waste2Worth
+</a>
+
+<div class="collapse navbar-collapse">
+
+<ul class="navbar-nav ms-auto">
+
+<li class="nav-item">
+<a class="nav-link" href="/">Home</a>
+</li>
+
+<li class="nav-item">
+<a class="nav-link" href="/upload">Upload</a>
+</li>
+
+<li class="nav-item">
+<a class="nav-link active-nav" href="/manual">
+Manual Entry
+</a>
+</li>
+
+</ul>
+
+</div>
+
+</div>
+</nav>
+
+<!-- HEADER -->
+
+<section class="page-header">
+
+<div class="container">
+
+<h1>
+Enter Waste <span>Materials</span>
+</h1>
+
+<p>
+Describe available waste items and let AI create a project
+</p>
+
+</div>
+
+</section>
+
+<!-- FORM -->
+
+<div class="container pb-5">
+
+<div class="entry-card">
+
+<form action="/generate" method="POST">
+
+<div id="materialsContainer">
+
+<div class="material-row">
+
+<div class="material-input">
+
+<input
+type="text"
+class="form-control"
+name="materials[]"
+placeholder="Example: Plastic Bottle">
+
+</div>
+
+<button
+type="button"
+class="remove-btn"
+onclick="removeField(this)">
+
+<i class="fa-solid fa-trash"></i>
+
+</button>
+
+</div>
+
+</div>
+
+<button
+type="button"
+class="add-btn"
+onclick="addField()">
+
+<i class="fa-solid fa-plus"></i>
+Add Material
+
+</button>
+
+<!-- PREVIEW -->
+
+<div class="material-preview">
+
+<h5 class="mt-4 mb-3">
+Material Preview
+</h5>
+
+<div id="chipsContainer"></div>
+
+</div>
+
+<!-- TIP -->
+
+<div class="tip-box">
+
+<h5>
+💡 Examples
+</h5>
+
+<p class="mb-0">
+
+Plastic Bottle,
+Cardboard Box,
+Old Wire,
+Glass Jar,
+Tin Can,
+Wood Pieces,
+Newspaper
+
+</p>
+
+</div>
+
+<div class="generate-section">
+
+<button
+type="submit"
+class="generate-btn">
+
+<i class="fa-solid fa-wand-magic-sparkles"></i>
+
+Generate AI Project
+
+</button>
+
+</div>
+
+</form>
+
+</div>
+
+</div>
+
+<script>
+
+function addField(){
+
+const container =
+document.getElementById("materialsContainer");
+
+const field = document.createElement("div");
+
+field.className="material-row";
+
+field.innerHTML=`
+
+<div class="material-input">
+
+<input
+type="text"
+class="form-control material-field"
+name="materials[]"
+placeholder="Enter Material"
+onkeyup="updatePreview()">
+
+</div>
+
+<button
+type="button"
+class="remove-btn"
+onclick="removeField(this)">
+
+<i class="fa-solid fa-trash"></i>
+
+</button>
+
+`;
+
+container.appendChild(field);
+
+}
+
+function removeField(btn){
+
+btn.parentElement.remove();
+
+updatePreview();
+
+}
+
+function updatePreview(){
+
+const chipsContainer =
+document.getElementById("chipsContainer");
+
+chipsContainer.innerHTML="";
+
+const fields =
+document.querySelectorAll("input[name='materials[]']");
+
+fields.forEach(field=>{
+
+if(field.value.trim()!=""){
+
+const chip =
+document.createElement("span");
+
+chip.className="chip";
+
+chip.innerText=field.value;
+
+chipsContainer.appendChild(chip);
+
+}
+
+});
+
+}
+
+document.addEventListener("input",updatePreview);
+
+</script>
+
+</body>
+</html>
