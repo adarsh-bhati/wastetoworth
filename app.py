@@ -442,3 +442,17 @@ if __name__ == "__main__":
     app.run(
         debug=True
     )
+"""
+agar imageb generation kerna ho to:
+User uploads image
+        ↓
+YOLOv8 detects object
+        ↓
+Gemini Vision understands condition
+        ↓
+Groq generates reuse idea
+        ↓
+Image Generation Model
+        ↓
+Ye waste item reuse hone ke baad kaisa dikhega"""    
+    
